@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>d3js playground</title>
+</head>
+<body>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+   <script>
+       /* var dataset = []
+            d3.csv("data/Manuel_Velasquez_Boxing_Fatality_Collection.csv", function(data) {
+            dataset = data.map(function(d) { return [ +d["SURVIVOR"], +d["COUNTRY"] ]; });
+            console.log(dataset)
+        }); */
+        d3.select("body").append("h1").text("Boxing Fatality Collection");
+        d3.csv("data/Manuel_Velasquez_Boxing_Fatality_Collection.csv", function(error, data) {
+        	data.forEach(function(d) {
+        		console.log(d);
+        	});
+        });
+
+   </script>
+</body>
+</html>
