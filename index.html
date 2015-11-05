@@ -17,7 +17,9 @@
         d3.select("body").append("h1").text("Boxing Fatality Collection");
         d3.csv("data/Manuel_Velasquez_Boxing_Fatality_Collection.csv", function(error, data) {
         	data.forEach(function(d) {
+        		content = JSON.stringify(d);
         		console.log(d);
+        		 d3.select("body").append("p").text(content);
         	});
         });
 
