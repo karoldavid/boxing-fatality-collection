@@ -16,14 +16,30 @@
             console.log(dataset)
             }); */
 
-            d3.select("body").append("h1").text("Boxing Fatality Collection");
-            d3.csv("data/Manuel_Velasquez_Boxing_Fatality_Collection.csv", function(error, data) {
+            /* d3.select("body").append("h1").text("Boxing Fatality Collection");
+            d3.csv("data/Manuel_Velasquez_Boxing_Fatality_Collection1.csv", function(error, data) {
         	    data.forEach(function(d) {
         		    content = JSON.stringify(d);
-        		    console.log(d);
-        		    d3.select("body").append("p").text(content);
+        		    //console.log(d);
+        		    //d3.select("body").append("p").text(content);
         	    });
-            });
+            }); */
+
+            d3.csv("data/Manuel_Velasquez_Boxing_Fatality_Collection1.csv", function(d) {
+           	    return {
+           	    	survivor: d.SURVIVOR,
+           	        result: d.RESULT,
+           	        deceased: d.DECEASED,
+           	        city: d.CITY
+                };
+            }, function(error, rows) {
+	                for (var r in rows) {
+	   	               d3.select("body").append("p").text(rows[r].survivor + ' ' + rows[r].result + ' '
+	   	               + rows[r].deceased + ' ' + rows[r].city);
+                    }
+               });
+
+
 
         </script>
     </body>
