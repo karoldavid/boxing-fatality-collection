@@ -10,35 +10,63 @@
     <body>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
         <script>
-            /* var dataset = []
-            d3.csv("data/Manuel_Velasquez_Boxing_Fatality_Collection.csv", function(data) {
-            dataset = data.map(function(d) { return [ +d["SURVIVOR"], +d["COUNTRY"] ]; });
-            console.log(dataset)
-            }); */
 
-            /* d3.select("body").append("h1").text("Boxing Fatality Collection");
-            d3.csv("data/Manuel_Velasquez_Boxing_Fatality_Collection1.csv", function(error, data) {
-        	    data.forEach(function(d) {
-        		    content = JSON.stringify(d);
-        		    //console.log(d);
-        		    //d3.select("body").append("p").text(content);
-        	    });
-            }); */
+
+            //Width and height
+            var w = 1000;
+            var h = 300;
+            var barPadding = 1;
+
+            var dataset = [];
+
+            //Create SVG element
+            var svg = d3.select("body")
+                        .append("svg")
+                        .attr("width", w)
+                        .attr("height", h);
+
 
             d3.csv("data/Manuel_Velasquez_Boxing_Fatality_Collection1.csv", function(d) {
            	    return {
-           	    	survivor: d.SURVIVOR,
-           	        result: d.RESULT,
-           	        deceased: d.DECEASED,
-           	        city: d.CITY
+           	        country: d.COUNTRY
                 };
             }, function(error, rows) {
-	                for (var r in rows) {
-	   	               d3.select("body").append("p").text(rows[r].survivor + ' ' + rows[r].result + ' '
-	   	               + rows[r].deceased + ' ' + rows[r].city);
-                    }
+                var data = [];
+
+                for (var r in rows) {
+
+                  if (rows[r].country in data) {
+                    data[rows[r].country]++
+                  } else {
+                    data[rows[r].country] = 1;
+                  }
+                }
+
+                for (var country in data) {
+                  dataset.push(data[country]);
+                }
+
+                console.log(dataset);
+
+              svg.selectAll("rect")
+               .data(dataset)
+               .enter()
+               .append("rect")
+               .attr("x", function(d, i) {
+                    return i * (w / dataset.length);
+               })
+               .attr("y", function(d) {
+                    return h - (dataset[d] * 4);
+               })
+               .attr("width", w / dataset.length - barPadding)
+               .attr("height", function(d) {
+                    return dataset[d] * 4;
+               })
+               .attr("fill", function(d) {
+                    return "rgb(0, 0, " + (dataset[d] * 10) + ")";
                });
 
+            });
 
 
         </script>
