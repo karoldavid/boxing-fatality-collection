@@ -15,4 +15,6 @@ Boxing Fatality Collection Visualization with D3
 
 * https://github.com/DerSpiegel/datenlese/blob/master/Manuel_Velasquez_Boxing_Fatality_Collection.csv
 
-## Email me at k.zysk@zoho.com
+## Questions?
+
+Email me at k.zysk@zoho.com
